@@ -1,5 +1,6 @@
 from fasthtml.common import *
 import json
+from datetime import datetime
 
 app, rt = fast_app()
 
@@ -210,6 +211,19 @@ STORY_NODES = {
             "text": "Further press the dock owner.",
             "next": "dockowner",
             "choice_id": "dockowner"
+        }]
+    },
+    "noexecuted": {
+        "title": "The Traitor's Confession",
+        "content": """After hours of careful interrogation, the traitor finally breaks down and reveals crucial information about the Jakeobin operations. His confession mentions several key infiltration points and even reveals a coded message about 'Debtors' who owe allegiance to the cause. This intelligence proves invaluable to the Loyalist cause.""",
+        "choices": [{
+            "text": "Use this information to strike immediately",
+            "next": "strike_now",
+            "choice_id": "strike"
+        }, {
+            "text": "Gather more intelligence first",
+            "next": "more_intel",
+            "choice_id": "intel"
         }]
     },
 }
@@ -672,50 +686,6 @@ def achievement():
 @rt("/")
 def get():
     return RedirectResponse("/story")
-@rt("/story")
-def story_page(node: str = "start", session_id: str = "default"):
-    session = get_user_session(session_id)
-    current_node = STORY_NODES.get(node, STORY_NODES["start"])
-
-    # Create choice buttons
-    choice_buttons = []
-    for choice in current_node["choices"]:
-        choice_buttons.append(
-            Button(
-                choice["text"],
-                type="submit",
-                name="choice",
-                value=choice["choice_id"],
-                style="display: block; width: 100%; margin: 10px 0; padding: 15px; text-align: left; background: #2c3e50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;"
-            )
-        )
-
-    return Titled(current_node["title"],
-        Div(
-            H2(current_node["title"], style="color: #34495e; margin-bottom: 20px;"),
-            P(current_node["content"], style="line-height: 1.6; margin-bottom: 30px; white-space: pre-line;"),
-            Form(
-                *choice_buttons,
-                Input(type="hidden", name="current_node", value=node),
-                Input(type="hidden", name="session_id", value=session_id),
-                action="/make_choice",
-                method="post"
-            ),
-            style="max-width: 800px; margin: 0 auto; padding: 20px;"
-        ),
-        # Story progress indicator
-        Div(
-            H4("Your Journey:"),
-            P(" → ".join([STORY_NODES[n]["title"] for n in session["story_path"] if n in STORY_NODES])),
-            style="margin-top: 40px; padding: 20px; background: #ecf0f1; border-radius: 5px;"
-        ) if len(session["story_path"]) > 1 else "",
-        # Navigation
-        Div(
-            A("Start Over", href="/restart", style="margin-right: 20px;"),
-            A("Story Map", href="/map"),
-            style="margin-top: 20px; text-align: center;"
-        )
-    )
 
 @rt("/make_choice")
 def post(choice: str, current_node: str, session_id: str = "default"):
