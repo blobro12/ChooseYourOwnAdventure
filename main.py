@@ -212,6 +212,36 @@ STORY_NODES = {
             "choice_id": "dockowner"
         }]
     },
+    "hotel": {
+        "title":
+        "Madame Luvre Hotel, 10:14 PM",
+        "content":
+        """'Welcome in, Detective. How may I help you?', said the clerk as you walked in. 'I'm here on a lead about the Half-Moon Murders. I believe that if the culprit were to hide anywhere, it'd be here.' 'Here. This is a master-key of the hotel. If he's in a room, you'll be able to get in.' A choice becomes obvious. How to find him?""",
+        "choices": [{
+            "text": "See if he was dumb enough to leave a name in the check-in book.",
+            "next": "checkinbook",
+            "choice_id": "checkinbook"
+        }, {
+            "text": "We'll have to check every room.",
+            "next": "everyroom",
+            "choice_id": "everyroom"
+        }]
+    },
+    "slums": {
+        "title":
+        "Corner of Southside and 5th Street. 1:13 PM",
+        "content":
+        """You get out of your car to find yourself standing on the corner of 5th and Southside. As rundown as this place looks, you do not feel threathened. You see a woman walking along the sidewalk. 'Ma'am I'm looking for the murderer of one of the people around this area. What could you tell me about his where-abouts?' 'I don't know anything, but I bet Big Johnny would... for a price.' You can't pass up on the lead of a lifetime. How to get to Big Johnny? """,
+        "choices": [{
+            "text": "We'll setup a raid a force it out of him.",
+            "next": "raided",
+            "choice_id": "raided"
+        }, {
+            "text": "Catching the Half-Moon Murderer is worth the price.",
+            "next": "appease",
+            "choice_id": "appease"
+        }]
+    },
 }
 user_sessions = {}
 
