@@ -1,6 +1,9 @@
 from fasthtml.common import *
 import json
 from datetime import datetime
+from starlette.responses import HTMLResponse  # Adjust this import as per your requirement
+# Then, in your function, replace Raw with HTMLResponse
+
 
 app, rt = fast_app()
 
@@ -227,6 +230,8 @@ STORY_NODES = {
         }]
     },
 }
+def story_page():
+    return HTMLResponse(f'<p style="line-height: 1.6; margin-bottom: 30px; white-space: pre-line;">{story_content}</p>')
 user_sessions = {}
 
 def get_user_session(session_id="default"):
@@ -556,7 +561,7 @@ def story_page(node: str = "start", session_id: str = "default"):
             # Story content with clickable words
             Div(
                 # Use raw HTML for the processed content
-                Raw(f'<p style="line-height: 1.6; margin-bottom: 30px; white-space: pre-line;">{story_content}</p>'),
+                HTML(f'<p style="line-height: 1.6; margin-bottom: 30px; white-space: pre-line;">{story_content}</p>'),
                 id="story-content"
             ),
 
