@@ -230,8 +230,7 @@ STORY_NODES = {
         }]
     },
 }
-def story_page():
-    return HTMLResponse(f'<p style="line-height: 1.6; margin-bottom: 30px; white-space: pre-line;">{story_content}</p>')
+
 user_sessions = {}
 
 def get_user_session(session_id="default"):
@@ -561,7 +560,7 @@ def story_page(node: str = "start", session_id: str = "default"):
             # Story content with clickable words
             Div(
                 # Use raw HTML for the processed content
-                HTML(f'<p style="line-height: 1.6; margin-bottom: 30px; white-space: pre-line;">{story_content}</p>'),
+                Raw(f'<p style="line-height: 1.6; margin-bottom: 30px; white-space: pre-line;">{story_content}</p>'),
                 id="story-content"
             ),
 
