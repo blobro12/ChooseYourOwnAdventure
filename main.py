@@ -386,8 +386,7 @@ Div(id="game-container",
 
             # Navigation
                   Div(
-                      style="text-align: center; margin-top: 20px;",
-                      * [
+                      *[
                           Button(
                               "🔄 Start Over",
                               hx_get="/restart",
@@ -402,7 +401,8 @@ Div(id="game-container",
                               hx_swap="innerHTML",
                               style="background: #95a5a6; color: white; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; margin: 10px;",
                           ),
-                      ]
+                      ],
+                      style="text-align: center; margin-top: 20px;"
                   )
    )
 
