@@ -238,9 +238,9 @@ def story_page(node: str = "start", session_id: str = "default"):
     # Code fragments display
     fragments_display = create_fragments_display(session)
 
-    return Titled("The Nexus Gate Adventures",
+    return Titled("The Nexus Gate Adventures"),
         # Enhanced CSS
-        Style("""
+Style("""
             body {
                 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
                 min-height: 100vh;
@@ -352,52 +352,59 @@ def story_page(node: str = "start", session_id: str = "default"):
         """),
 
         # Include hyperscript for enhanced interactions
-        Script(src="https://unpkg.com/hyperscript.org@0.9.12"),
+Script(src="https://unpkg.com/hyperscript.org@0.9.12"),
 
-        Div(
-            H1("🌟 The Nexus Gate Adventures", 
+Div(
+            H1("🌟 The Nexus Gate Adventures"), 
                style="text-align: center; color: #2c3e50; margin-bottom: 30px;"),
 
-            Div(id="game-container",
+Div(id="game-container",
                 H2(current_node["title"], style="color: #34495e; margin-bottom: 20px;"),
 
                 # Story content with clickable words
                 Div(
-                    Raw(story_content=story_content),
-                    class_="story-content"
+                    H2(current_node["title"], style="color: #34495e; margin-bottom: 20px;"),
+                    # Story content with clickable words
+                    Div(
+                        Raw(story_content), 
+                        class_="story-content"
+                    ),
+                    # Secret response area
+                    Div(id="secret-response", style="min-height: 20px;"),
+                    # Code fragments display
+                    fragments_display,
+                    # Choice buttons
+                    Div(
+                        *choice_buttons,  # Unpacked positional arguments first
+                        style="margin: 30px 0;"  # Keyword arguments after
+                    ),
+                    # Progress indicator
+                    create_progress_indicator(session),
+                    id="game-container",
+                    class_="game-container"
                 ),
 
-                # Secret response area
-                Div(id="secret-response", style="min-height: 20px;"),
-
-                # Code fragments display
-                fragments_display,
-
-                # Choice buttons
-                Div(*choice_buttons, style="margin: 30px 0;"),
-
-                # Progress indicator
-                create_progress_indicator(session),
-
-                class_="game-container"
-            ),
-
             # Navigation
-            Div(
-                Button("🔄 Start Over", 
-                       hx_get="/restart",
-                       hx_target="#game-container", 
-                       hx_swap="innerHTML",
-                       style="background: #e74c3c; color: white; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; margin: 10px;"),
-                Button("🗺️ Story Map", 
-                       hx_get="/map",
-                       hx_target="#game-container",
-                       hx_swap="innerHTML", 
-                       style="background: #95a5a6; color: white; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; margin: 10px;"),
-                style="text-align: center; margin-top: 20px;"
-            )
-        )
-    )
+                  Div(
+                      style="text-align: center; margin-top: 20px;",
+                      * [
+                          Button(
+                              "🔄 Start Over",
+                              hx_get="/restart",
+                              hx_target="#game-container",
+                              hx_swap="innerHTML",
+                              style="background: #e74c3c; color: white; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; margin: 10px;",
+                          ),
+                          Button(
+                              "🗺️ Story Map",
+                              hx_get="/map",
+                              hx_target="#game-container",
+                              hx_swap="innerHTML",
+                              style="background: #95a5a6; color: white; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; margin: 10px;",
+                          ),
+                      ]
+                  )
+   )
 
 def create_fragments_display(session):
     """Create the fragments display section"""
