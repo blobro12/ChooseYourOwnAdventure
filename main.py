@@ -270,7 +270,8 @@ STORY_NODES = {
         "choices": [{
             "text": "We'll setup a raid and force it out of him.",
             "next": "raided",
-            "choice_id": "raided"
+            "choice_id": "raided",
+            "requirements": {"items": ["hierachyofsociety", "docknote"],},
         }, {
             "text": "Let's reach out and see if he'll hand it over peacefully",
             "next": "appease",
