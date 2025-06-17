@@ -6,10 +6,12 @@ app, rt = fast_app()
 # Story/Decision Tree Structure with Requirements and Items
 STORY_NODES = {
     "start": {
-        "title": "The Nexus Gate",
-        "content": """You awaken in a room with smooth, obsidian walls. A glowing triangular portal hovers before you. A voice whispers:
+        "title":
+        "The Nexus Gate",
+        "content":
+        """You awaken in a room with smooth, obsidian walls. A glowing triangular portal hovers before you. A voice whispers:
 
-'You may enter one of three paths. Each leads to a world of choice and consequence.'""",
+    'You may enter one of three paths. Each leads to a world of choice and consequence.'""",
         "choices": [{
             "text": "🐉  Enter The Shattered Kingdom (Fantasy)",
             "next": "fantasy_start",
@@ -25,10 +27,12 @@ STORY_NODES = {
         }]
     },
     "fantasy_start": {
-        "title": "The Shattered Kingdom",
-        "content": """ You step into a ruined kingdom where dragons once ruled, now fractured by civil war and dark magic. Your Role: A supposedly lost heir to a royal family that was deposed 17 years ago by the Jakeobins. You bewield a secret power that could shape the future of the entire Kingdom. There are myths of a Dragon's Heart which if obtained would allow the user to transform into a dragon temporarily. However, the people grow restless of the new regime. What do you do?""",
+        "title":
+        "The Shattered Kingdom",
+        "content":
+        """ You step into a ruined kingdom where dragons once ruled, now fractured by civil war and dark magic. Your Role: A supposedly lost heir to a royal family that was deposed 17 years ago by the Jakeobins. You bewield a secret power that could shape the future of the entire Kingdom. There are myths of a Dragon's Heart which if obtained would allow the user to transform into a dragon temporarily. However, the people grow restless of the new regime. What do you do?""",
         "choices": [{
-            "text": "A. Seek the Dragon's Heart (legendary gem of power)",
+            "text": "A. Seek the Dragon’s Heart (legendary gem of power)",
             "next": "dragons_heart",
             "choice_id": "heart"
         }, {
@@ -39,43 +43,31 @@ STORY_NODES = {
             "text": "C. Spy on the Jakeobin's Plans",
             "next": "spyplans",
             "choice_id": "spy"
-        }, {
-            "text": "🔒 D. Use Ancient Royal Magic (Requires Royal Seal)",
-            "next": "royal_magic",
-            "choice_id": "royal_magic",
-            "requirements": {"items": ["royal_seal"]},
-            "locked_text": "You need the Royal Seal to access ancient magic"
         }]
     },
     "dragons_heart": {
-        "title": "The Dragon's Heart",
-        "content": """You journey through the Cursed Woods of the East, the rumored location of the Dragon's Heart. After a multi-day journey, you begin to doubt these rumors. Suddenly, you spot a tucked away cave that might just host what you are looking for. You walk in cautiously. This seems almost too easy. There it sits. However, not in the form you expected. A dying dragon, clearly past its prime stares before you. 'Human.... I have not much left to offer Take my heart and follow in my footsteps.' There it lies. What do you do?""",
+        "title":
+        "The Dragon's Heart",
+        "content":
+        """You journey through the Cursed Woods of the East, the rumored location of the Dragon's Heart. After a multi-day journey, you begin to doubt these rumors. Suddenly, you spot a tucked away cave that might just host what you are looking for. You walk in cautiously. This seems almost too easy. There it sits. However, not in the form you expected. A dying dragon, clearly past its prime stares before you. 'Human.... I have not much left to offer Take my heart and follow in my footsteps.' There it lies. What do you do?""",
         "choices": [
             {
                 "text": "Accept the Gem from the Dragon",
                 "next": "dragongem",
-                "choice_id": "dragongem",
-                "gives_items": ["dragon_heart"]
+                "choice_id": "dragongem"
             },
             {
                 "text": "Refuse and destroy the Gem",
                 "next": "nodragongem",
-                "choice_id": "nodragongem",
-                "gives_items": ["dragon_peace"]
+                "choice_id": "nodragongem"
             },
-            {
-                "text": "🔒 Attempt to heal the Dragon (Requires Dragon Peace from previous playthrough)",
-                "next": "heal_dragon",
-                "choice_id": "heal_dragon",
-                "requirements": {"completed_routes": ["nodragongem"]},
-                "locked_text": "You must have chosen peace with dragons before to unlock this path",
-                "gives_items": ["dragon_ally"]
-            }
         ]
     },
     "rallyloyals": {
-        "title": "Rallying the Loyalists",
-        "content": """ You approach the Loyalists. Their presentation is underwhelming, situated in the back of a tavern. However, they promise there are hundreds of groups ready to strike at their command. However, the Head of the Jakeobins has began putting out vast wealth prizes for people who defect and give away intelligence. The Head Knight who appears to be dressed in gold armor speaks up from the back of table, looking ominously towards you, 'We recently discovered a rat within our own guild. As the heir, we trust you will be just in his punishment. What shall it be?' """,
+        "title":
+        "Rallying the Loyalists",
+        "content":
+        """ You approach the Loyalists. Their presentation is underwhelming, situated in the back of a tavern. However, they promise there are hundreds of groups ready to strike at their command. However, the Head of the Jakeobins has began putting out vast wealth prizes for people who defect and give away intelligence. The Head Knight who appears to be dressed in gold armor speaks up from the back of table, looking ominously towards you, 'We recently discovered a rat within our own guild. As the heir, we trust you will be just in his punishment. What shall it be?' """,
         "choices": [
             {
                 "text": "Execute him as an example of what we do to traitors!",
@@ -83,175 +75,182 @@ STORY_NODES = {
                 "choice_id": "executed"
             },
             {
-                "text": "Although he is a rat, maybe he can give us some intel on the Jakeobins...",
+                "text":
+                "Although he is a rat, maybe he can give us some intel on the Jakeobins...",
                 "next": "noexecuted",
-                "choice_id": "noexecuted",
-                "gives_items": ["spy_intel"]
+                "choice_id": "noexecuted"
             },
-            {
-                "text": "🔒 Offer him a chance at redemption (Requires Dragon Heart power)",
-                "next": "redemption_path",
-                "choice_id": "redemption",
-                "requirements": {"items": ["dragon_heart"]},
-                "locked_text": "You need the Dragon's power to sense his true intentions"
-            }
         ]
     },
     "spyplans": {
-        "title": "Spying on the Jakeobins",
-        "content": """You are approached by a man appearing to be dressed in all black. 'Your the heir they spoke of, right?' Intel has it they're staging a big operation to shut down the Loyalist coup and by extension your ticket to power. We have two ideas for getting in: A big distraction or a more... stealthy approach. What do you think? """,
+        "title":
+        "Spying on the Jakeobins",
+        "content":
+        """You are approached by a man appearing to be dressed in all black. 'Your the heir they spoke of, right?' Intel has it they're staging a big operation to shut down the Loyalist coup and by extension your ticket to power. We have two ideas for getting in: A big distraction or a more... stealthy approach. What do you think? """,
         "choices": [
             {
                 "text": "Go big or go home, right?",
                 "next": "loud",
-                "choice_id": "loud",
-                "gives_items": ["explosive_knowledge"]
+                "choice_id": "loud"
             },
             {
                 "text": "If we want to outsmart them, we must be meticulous.",
                 "next": "stealthy",
-                "choice_id": "stealthy",
-                "gives_items": ["stealth_training"]
+                "choice_id": "stealthy"
             },
-            {
-                "text": "🔒 Use the spy intel to infiltrate perfectly (Requires Intel)",
-                "next": "perfect_infiltration",
-                "choice_id": "perfect_infiltration",
-                "requirements": {"items": ["spy_intel"]},
-                "locked_text": "You need intelligence from interrogating the traitor",
-                "gives_items": ["royal_seal"]
-            }
-        ]
-    },
-    # New nodes for locked content
-    "royal_magic": {
-        "title": "Ancient Royal Magic",
-        "content": """With the Royal Seal glowing in your hand, you feel the ancient magic of your bloodline coursing through your veins. The seal reveals hidden passages and forgotten spells that your ancestors once wielded. You can sense the true loyalties of everyone around you and command respect through divine right.""",
-        "choices": [
-            {
-                "text": "Use the magic to unite all factions peacefully",
-                "next": "magical_unity",
-                "choice_id": "magical_unity"
-            },
-            {
-                "text": "Combine royal magic with dragon power (if you have it)",
-                "next": "ultimate_power",
-                "choice_id": "ultimate_power",
-                "requirements": {"items": ["dragon_heart"]},
-                "locked_text": "You need both Royal Seal and Dragon Heart for ultimate power"
-            }
-        ]
-    },
-    "heal_dragon": {
-        "title": "The Dragon's Redemption",
-        "content": """Having learned compassion from your previous journey, you approach the dying dragon differently. You place your hands on its ancient scales and channel healing energy. The dragon's eyes brighten as life returns to its massive form. 'You... you have changed since we last met across the threads of fate. I am in your debt, young heir.'""",
-        "choices": [
-            {
-                "text": "Ask the dragon to be your ally",
-                "next": "dragon_alliance",
-                "choice_id": "dragon_alliance"
-            },
-            {
-                "text": "Request the dragon teach you ancient wisdom",
-                "next": "dragon_wisdom",
-                "choice_id": "dragon_wisdom"
-            }
-        ]
-    },
-    "redemption_path": {
-        "title": "The Power of Redemption",
-        "content": """The Dragon Heart's power allows you to see into the traitor's soul. You discover he was being blackmailed - the Jakeobins threatened his family. With your newfound power, you help him rescue his loved ones and turn him into your most loyal ally.""",
-        "choices": [
-            {
-                "text": "Lead a perfectly informed rebellion",
-                "next": "perfect_rebellion",
-                "choice_id": "perfect_rebellion"
-            }
-        ]
-    },
-    "perfect_infiltration": {
-        "title": "The Master Spy",
-        "content": """Using the detailed intelligence from your interrogation, you walk directly into the Jakeobin stronghold disguised as one of their own agents. You're not just sneaking around - you're attending their strategy meetings and sabotaging their plans from within. You discover the location of the lost Royal Seal.""",
-        "choices": [
-            {
-                "text": "Retrieve the Royal Seal and expose their plans",
-                "next": "seal_retrieved",
-                "choice_id": "seal_retrieved"
-            }
         ]
     },
 
-    # Continue with existing sci-fi and mystery content...
     "scifi_start": {
-        "title": "Echoes of Andromeda",
-        "content": """'Captain, We've recieved some messages from an unknown outpost roughly 2 light-years away. We believe that they might be useful to tracking down the secret civilization we've been looking for. However, as of right now, only me and you know about the message. What should we do?'""",
+        "title":
+        "Echoes of Andromeda",
+        "content":
+        """'Captain, We've recieved some messages from an unknown outpost roughly 2 light-years away. We believe that they might be useful to tracking down the secret civilization we've been looking for. However, as of right now, only me and you know about the message. What should we do?'""",
         "choices": [{
             "text": "Let's keep it underwraps, and see where it leads.",
             "next": "echodiver",
             "choice_id": "echodiver"
         }, {
-            "text": "We need to inform high command ASAP! This might get us promoted!",
+            "text":
+            "We need to inform high command ASAP! This might get us promoted!",
             "next": "highcommand",
             "choice_id": "highcommand"
         }, {
             "text": "Why would they contact us? You must be hearing things.",
             "next": "doubt",
             "choice_id": "doubt"
-        }, {
-            "text": "🔒 Use stealth training to investigate secretly (Requires Stealth Training)",
-            "next": "stealth_investigation",
-            "choice_id": "stealth_investigation",
-            "requirements": {"items": ["stealth_training"]},
-            "locked_text": "You need stealth training from a previous adventure"
         }]
     },
+    "echodiver": {
+        "title":
+        "What do we have here?",
+        "content":
+        """After weeks of studying the message undercover for weeks, there seems to be some technology this civilization is hiding from you. The message states that they have a way to 'See while they are asleep.'You believe this might be a hint to dream technology and might be the best way to learn more about them through hijacking and monitoring their dreams. The only question now: How do we get in? """,
+        "choices": [
+            {
+                "text": "Let's to hack into it using a message with a trojan horse.",
+                "next": "trojanhorse",
+                "choice_id": "trojanhorse"
+            },
+            {
+                "text": "Let's just ask 'em. No harm no foul, right?'",
+                "next": "diplo",
+                "choice_id": "diplo"
+            },
+                "text": "We know about the..."
+        ]
+    },
+    "highcommand": {
+        "title":
+        "Alpha Delta High Command Center...",
+        "content":
+        """'Sir, We've picked up some messages from 2 light-years away. I believe this would be our best way in finding out more about this civilization' 'Send me the message. I'll run in through our analyist team; get back to you. If you're right, this could warrant some serious headway. Now about the aliens, what do you think we should do with them once we contact them? """,
+        "choices": [
+            {
+                "text": "If they are just as advanced as we are, it would be best for us to make an alliance with them.",
+                "next": "peace",
+                "choice_id": "peace"
+            },
+            {
+                "text": "If they are as advanced as we are, they need to be conquered before they become a threat.",
+                "next": "conquer",
+                "choice_id": "conquer"
+            },
+        ]
+    },
+    "doubt": {
+        "title":
+        "That can't be right.",
+        "content":
+        """'With all due respect, why would they want to reach out to us if we're the ones hunting them?' 
+        'I don't know, sir. Maybe, they want to be found?' 
+        'I'm sorry. I'm just not buying it. If it submit this; it's wrong. I could be in some serious trouble. I just can't take the risk. The intern walks off while leaving the drive with the message on your desk. This presents an opportunity.... """,
+        "choices": [
+            {
+                "text": "Take the drive and pass it off as your own findings.",
+                "next": "falsefame",
+                "choice_id": "falsefame"
+            },
+            {
+                "text": "Throw out the drive.",
+                "next": "trash",
+                "choice_id": "trash"
+            },
+        ]
+    },
     "mystery_start": {
-        "title": "The Vanishing Hour",
-        "content": """Rain drips down your window. These murders, more recently named the Half-Moon Murders, all seem the same. The victims all recieve a letter with four letters: ISYS. We're not sure what these letters mean yet, but we have gotten some leads. One of the foot officers claim that some folks around town could help us. Specifically, the docks, the hotel, and in the slums. Where should we start?""",
+        "title":
+        "The Vanishing Hour",
+        "content":
+        """Rain drips down your window. These murders, more recently named the Half-Moon Murders, all seem the same. The victims all recieve a letter with four letters: ISYS. We're not sure what these letters mean yet, but we have gotten some leads. One of the foot officers claim that some folks around town could help us. Specifically, the docks, the hotel, and in the slums. Where should we start?""",
         "choices": [{
             "text": "The docks. The last case took place at the docks.",
             "next": "docks",
             "choice_id": "docks"
         }, {
-            "text": "The hotel. If our killer would be anywhere, that's where he'd be.",
+            "text":
+            "The hotel. If our killer would be anywhere, that's where he'd be.",
             "next": "hotel",
             "choice_id": "hotel"
         }, {
             "text": "The slums. They're our best chance of tracking him down.",
             "next": "slums",
             "choice_id": "slums"
-        }, {
-            "text": "🔒 Use explosive knowledge to force answers (Requires Explosive Knowledge)",
-            "next": "explosive_interrogation",
-            "choice_id": "explosive_interrogation",
-            "requirements": {"items": ["explosive_knowledge"]},
-            "locked_text": "You need knowledge of explosives from a previous adventure"
+            "requirements": "halfmoonintel"
         }]
     },
-
-    # Continue with existing content but add some cross-story requirements...
     "docks": {
-        "title": "Hartweather Docks; 11:48 PM",
-        "content": """You arrive at the docks. The place seems like it's out of an old photograph where everything around you is a shade of gray. The owner of the docks comes out to greet you. 'You're here 'bout those murders, right? Here's everything I know. The victim was a lady who was not a frequent customer, but she did mention something 'bout a letter she got. I don't even think she owns a boat. That's why I was puzzled when I heard of the news of her drowning out on the lake. I still don't think something's right 'bout that.... """,
+        "title":
+        "Hartweather Docks; 11:48 PM",
+        "content":
+        """You arrive at the docks. The place seems like it's out of an old photograph where everything around you is a shade of gray. The owner of the docks comes out to greet you. 'You're here 'bout those murders, right? Here's everything I know. The victim was a lady who was not a frequent customer, but she did mention something 'bout a letter she got. I don't even think she owns a boat. That's why I was puzzled when I heard of the news of her drowning out on the lake. I still don't think something's right 'bout that.... """,
         "choices": [{
             "text": "Investigate around the lake where the body was found.",
             "next": "lakeinv",
             "choice_id": "lakeinv"
+            gives_items: ["docknote"]
         }, {
             "text": "Further press the dock owner.",
             "next": "dockowner",
             "choice_id": "dockowner"
-        }, {
-            "text": "🔒 Use dragon wisdom to sense deception (Requires Dragon Ally)",
-            "next": "truth_sensing",
-            "choice_id": "truth_sensing",
-            "requirements": {"items": ["dragon_ally"]},
-            "locked_text": "You need the wisdom of dragons to see through lies"
+            "requirements": "docknote"
         }]
     },
-
-    # Add more existing nodes with some modifications for items...
-    # (I'll include key ones to show the pattern)
+    "hotel": {
+        "title":
+        "Madame Luvre Hotel, 10:14 PM",
+        "content":
+        """'Welcome in, Detective. How may I help you?', said the clerk as you walked in. 
+        'I'm here on a lead about the Half-Moon Murders. I believe that if the culprit were to hide anywhere, it'd be here.' 
+        'Here. This is a master-key of the hotel. If he's in a room, you'll be able to get in.' A choice becomes obvious. How to find him?""",
+        "choices": [{
+            "text": "See if he was dumb enough to leave a name in the check-in book.",
+            "next": "checkinbook",
+            "choice_id": "checkinbook"
+            gives_items: ["halfmoonintel"]
+        }, {
+            "text": "We'll have to check every room.",
+            "next": "everyroom",
+            "choice_id": "everyroom"
+            gives_items: ["hierachyofsociety"]
+        }]
+    },
+    "slums": {
+        "title":
+        "Corner of Southside and 5th Street. 1:13 PM",
+        "content":
+        """You get out of your car to find yourself standing on the corner of 5th and Southside. As rundown as this place looks, you do not feel threathened. You see a woman walking along the sidewalk. 'Ma'am I'm looking for the murderer of one of the people around this area. What could you tell me about his where-abouts?'
+        'I don't know anything, but I bet Big Johnny would... for a price.' You can't pass up on the lead of a lifetime. How to get to Big Johnny? """,
+        "choices": [{
+            "text": "We'll setup a raid a force it out of him.",
+            "next": "raided",
+            "choice_id": "raided"
+        }, {
+            "text": "Catching the Half-Moon Murderer is worth the price.",
+            "next": "appease",
+            "choice_id": "appease"
+        }]
+    },
 }
 
 # Enhanced user session structure
