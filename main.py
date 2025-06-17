@@ -422,13 +422,24 @@ def post(choice: str, current_node: str, session_id: str = "default"):
 
     if choice_data and next_node and next_node in STORY_NODES:
         # Update session with choice data (including items)
-        update_user_session(
-            session_id, next_node, choice_data)
+        session = update_user_session(session_id, next_node, choice_data)
+        
+        # Debug: Print items for verification
+        print(f"Items collected: {session['items_collected']}")
+        
         return RedirectResponse(
             f"/story?node={next_node}&session_id={session_id}")
     else:
         # Handle ending or invalid choice
         session = get_user_session(session_id)
+        
+        # Check if this choice gives items before ending
+        for choice_option in node_data["choices"]:
+            if choice_option["choice_id"] == choice and "gives_items" in choice_option:
+                for item in choice_option["gives_items"]:
+                    if item not in session["items_collected"]:
+                        session["items_collected"].append(item)
+        
         if choice not in session["completed_routes"]:
             session["completed_routes"].append(choice)
         session["playthrough_count"] += 1
